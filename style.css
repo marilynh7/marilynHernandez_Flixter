@@ -1,0 +1,21 @@
+body{
+    background-color: black
+ }
+  
+ #header{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+ }
+  
+ #header h1{
+    color: white;
+ }
+  
+ .load{
+    display:flex;
+    justify-content: center;
+    /* position: absolute;
+    bottom:0; */
+  }
+ 
