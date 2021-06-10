@@ -58,8 +58,20 @@ body{
   }
 
 
- #here{
-    color: white;
- }
+  h1{
+     font-size: 500%;
+  }
 
+  #search{
+     height: 20px;
+     width: 300px;
+  }
  
+  #loadButton{
+   padding: 14px 35px;
+   background-color: #e7e7e7; color: black;
+  }
+
+  #searchButton{
+   padding: 12px 15px;
+  }
