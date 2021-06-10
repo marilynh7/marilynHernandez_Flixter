@@ -8,6 +8,7 @@ movieForm.addEventListener("submit", getResults);
  
 async function getResults(event){
    event.preventDefault();
+   clearHTML();
    console.log("In get results function");
  
    const userInput = event.target.search;
@@ -25,3 +26,28 @@ async function getResults(event){
  
 // https://image.tmdb.org/t/p/original/(backdrop_path)
 }
+
+function displayResults(movieData){
+   //console.log(movieData.backdrop_path);
+   let moviePoster = movieData.poster_path;
+   let movieTitle = movieData.original_title;
+   console.log(movieTitle);
+   let posterSrc = "https://image.tmdb.org/t/p/original/"+moviePoster;
+   //console.log(posterSrc);
+   movieArea.innerHTML += `
+   <div id="movieInfo">
+
+      <img id = "poster" src="${posterSrc}" alt="Movie Poseter"> </img>
+      <h4 id= "titles">${movieTitle} </h4>
+
+   </div>    
+   `
+}
+
+// for every new search it clears out the website area 
+function clearHTML(){
+   movieArea.innerHTML = `
+
+   `
+}
+
