@@ -3,21 +3,21 @@ const apiKey = "011647eee57bc654602e870e8f6281ce";
 const movieForm = document.querySelector("form");
 const movieArea = document.querySelector("#movieArea");
 const search = document.querySelector("#search");
-//when you click the search button movie results will appear 
-//.addEventListener("submit", getResults);
+var trendingApiPage = 1;
+
+//when you input text in the search bar getResults function is called 
 search.addEventListener("input",getResults);
+
 //get the seach movie data from the API and call displayResults
 async function getResults(event){
    event.preventDefault();
    //clears the page after every search 
    clearHTML();
-   //looks at the search box 
-   const input = event.target.value;
    //gets the value inputted in the search bar 
-   //const input = userInput.value;
+   const input = event.target.value;
+   //if nothing is in the search bar go back to the last trending page 
    if(!input){
       getTrending(trendingApiPage);
-      const reloadtButton = document. querySelector("#reload");
    }
    const apiURL = "https://api.themoviedb.org/3/search/movie?api_key="+apiKey+"&language=en-US&query="+input+"&page=1&include_adult=false";
    //Gets data from the API 
@@ -29,16 +29,13 @@ async function getResults(event){
 
 //dynaminaclly adds the searched movie results to HTML 
 function displayResults(movieData){
-
-
    let moviePoster = movieData.poster_path;
    let movieTitle = movieData.original_title;
    let movieRating = movieData.vote_average;
    let posterSrc = "https://image.tmdb.org/t/p/original/"+moviePoster;
    movieArea.innerHTML += `
    <div id="movieInfo">
-
-      <img class = "poster" src="${posterSrc}" alt="Movie Poseter"> </img>
+      <img class = "poster" src="${posterSrc}" alt="${movieTitle}"> </img>
       <h4 id= "titles">${movieTitle} </h4>
       <div id="ratings">
          <p>&#11088;</p>
@@ -53,8 +50,6 @@ function clearHTML(){
    movieArea.innerHTML = ` `
 }
 
-
-var trendingApiPage = 1;
 const trendingArea = document.querySelector("#movieArea");
 
 //get the trending movie data from the API and call displayTrending 
@@ -87,20 +82,23 @@ function displayTrending(movieData){
 
 }
 
-//Load trending movies on main page 
+//show trending movies on main page 
 getTrending(trendingApiPage);
 
 
+//Add more movies to the trending page when load button is clicked 
 const loadButton = document.querySelector(".load");
 async function loadMoreClick(event){
       trendingApiPage++;
-      movieArea.innerHTML  = ` `;
       getTrending(trendingApiPage);
    }
    
 
 loadButton.addEventListener('click',loadMoreClick);
 
+
+
+//in progress...working on the display more info popup
  document.body.addEventListener('click', (event)=>{
     info(event);
  })
